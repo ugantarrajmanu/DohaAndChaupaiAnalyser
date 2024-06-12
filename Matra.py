@@ -186,7 +186,10 @@ class PronunciationDictionary:
             while (i >= 0):
 
                 if (word[i] in laghu):
-                    if word[i] == "ँ" and (word[i-1] in laghu or word[i-1] in guru):
+                    if word[i] == "ँ" and (word[i-1] >= "क" and word[i-1] <= "ह") or word[i-1] == "ड़":
+                        i -= 1
+                        continue
+                    elif word[i] == "ँ" and (word[i-1] in laghu or word[i-1] in guru):
                         i -= 1
                     temp.insert(0, scansion[j])
                     self.word_scansion.insert(0, temp[:])
@@ -420,6 +423,6 @@ class Chaupai(MatraCount):
     def getChaupaiKala(self):
         return self.findingKala()
 
-# a = "तुलसी रघुबर नाम के बरन बिराजत दोउ"
-# b = MatraCount(a).getSentenceQuarter()
+# a = "विहँसत"
+# b = PronunciationDictionary(a, MatraCount(a).getScansion()).getPronunciation()
 # print(b)
