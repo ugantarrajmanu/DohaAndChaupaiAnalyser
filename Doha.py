@@ -19,6 +19,7 @@ class Doha:
         self.word_pronunciation = []
         self.sentence_pronunciation = []
         self.rhythm = []
+        self.score = 0
 
         for x in doha:
             a = MatraCount(x).getSentenceQuarter()
@@ -34,7 +35,7 @@ class Doha:
         
         for i in range(len(self.scansion_quartered)):
             if sum(self.scansion_quartered[i]) == (13 if i == 0 or i == 2 else 11):
-                print(sum(self.scansion_quartered[i]))
+                self.score += 1
 
                 for x in self.word_pronunciation:
                     temp = []
@@ -112,6 +113,9 @@ class Doha:
     def getRhythm(self):
         return self.rhythm
     
+    def getScore(self):
+        return self.score/4
+    
 
-a = "श्रीगुरु चरन सरोज रज निजमनु मुकुरु सुधारि\nबरनउँ रघुबर बिमल जसु जो दायकु फले चारि"
-print(Doha(a).getRhythm())
+a = "श्रीगुरु चरन सरोज रज निजमनु मुकुरु सुधारि\nबरनउँ रघुबर बिमल जसु जो दायकु फल चारि"
+print(Doha(a).getScore())
