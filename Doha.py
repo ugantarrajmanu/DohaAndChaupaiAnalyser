@@ -31,17 +31,19 @@ class Doha:
         for x in range (0, len(self.scansion_quartered)):
             a = pd(self.doha_quartered[x], self.scansion_quartered[x]).getPronunciation()
             self.word_pronunciation.append(a)
-
-        for x in self.word_pronunciation:
-            temp = []
-            for y in x:
-                for z in y:
-                    temp.append(z)
-            self.sentence_pronunciation.append(temp[:])
-            temp.clear()
         
         for i in range(len(self.scansion_quartered)):
-            if sum(self.scansion_quartered[i]) == 13 if i == 0 or i == 2 else 11:
+            if sum(self.scansion_quartered[i]) == (13 if i == 0 or i == 2 else 11):
+                print(sum(self.scansion_quartered[i]))
+
+                for x in self.word_pronunciation:
+                    temp = []
+                    for y in x:
+                        for z in y:
+                            temp.append(z)
+                    self.sentence_pronunciation.append(temp[:])
+                    temp.clear()
+
                 first_rhythm = 0
                 temp_rhythm = []
                 for x in self.word_pronunciation[i][0]:
@@ -81,7 +83,6 @@ class Doha:
                     
                     self.rhythm.append(temp_rhythm[:])
                     temp_rhythm.clear()
-
                 
                 elif first_rhythm == 2:
                     count = first_rhythm
@@ -112,5 +113,5 @@ class Doha:
         return self.rhythm
     
 
-a = "श्रीगुरु चरन सरोज रज निजमनु मुकुरु सुधारि\nबरनउँ रघुबर बिमल जसु जो दायकु फल चारि"
+a = "श्रीगुरु चरन सरोज रज निजमनु मुकुरु सुधारि\nबरनउँ रघुबर बिमल जसु जो दायकु फले चारि"
 print(Doha(a).getRhythm())
