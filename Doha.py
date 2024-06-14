@@ -1,3 +1,8 @@
+# This is for operations on Doha 
+# like getting its scansion, breaking doha into quarters
+# getting pronunciation of words, and at last rhythm of the
+# Doha but for only Doha without matra balancing case.
+
 from Matra import MatraCount, PronunciationDictionary as pd
 from MatraDrop import DohaMatraDrop
 from termcolor import colored, cprint
