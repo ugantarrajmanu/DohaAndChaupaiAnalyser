@@ -93,7 +93,6 @@ class Doha:
                     temp_rhythm.clear()
             else:
                 pass
-        print(rhythm)
     
     def getQuarteredScansion(self):
         return scansion_quartered
@@ -104,9 +103,9 @@ class Doha:
     def getPronunciation(self):
         return word_pronunciation
 
-    def getQuarteredDoha(self):
+    def getRhythm(self):
         return rhythm
     
 
 a = "श्रीगुरु चरन सरोज रज निजमनु मुकुरु सुधारि\nबरनउँ रघुबर बिमल जसु जो दायकु फल चारि"
-Doha(a)
+Doha(a).getRhythm()
