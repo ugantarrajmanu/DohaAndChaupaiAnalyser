@@ -171,16 +171,32 @@ class PronunciationDictionary:
     def __init__(self, sentence, scansion):
         self.word = sentence.split(" ")  # imput: - each word
         self.sentecne = []
+        
+        words_scansion = []
+        for x in self.word:
+            words_scansion.append(MatraCount(x).getScansion())
+
+        new_word_scansion = []
+        l = 0
+        for j in range(0, len(words_scansion)):
+            temp = []
+            for k in range (len(words_scansion[j])):
+                temp.append(scansion[l])
+                l += 1
+            new_word_scansion.append(temp[:])
+            temp.clear()
 
         guru = "ाीेैोौूं"
         laghu = "िुृँ"
         swar = "अइउऋआईऊएऐओऔ"
         temp = []
         count = 0
+        word_sc_loop = 0
         for word in self.word:
             self.word_scansion = []
             self.matra = MatraCount(word)
-            scansion = self.matra.getScansion()
+            scansion = new_word_scansion[word_sc_loop]
+            word_sc_loop += 1
             i = len(word) - 1
             j = len(scansion) - 1
             while (i >= 0):
