@@ -13,22 +13,20 @@ class DohaMatraDrop(MatraCount):
         # stores modified scansion after matra balancing
         self.modified_scansion = []
 
-        candidates = self.dropCandidate(line)
-        print(candidates)
-        
+        self.candidates = self.dropCandidate(line)
+
         # how many matra are to be dropped
         how_many_matra_to_drop = sum_of_scansion - 13
 
         # combinatin of indexes which can be dropped in quarter 1
-        combis = self.findCombination(candidates, how_many_matra_to_drop)
+        combis = self.findCombination(self.candidates, how_many_matra_to_drop)
 
         # dropping the matra in scanion for making new scansion
         for x in combis:
-            new_scansion = scansion
+            new_scansion = scansion[:]
             for y in x:
                 new_scansion[y] = 1      # dropping matra at the candidate indexs.
-            self.modified_scansion.append(new_scansion)
-        print(self.modified_scansion)
+            self.modified_scansion.append(new_scansion[:])
         
     def findCombination(self, candidate, matras_to_drop):
         # variable to store all the combinations
@@ -77,6 +75,12 @@ class DohaMatraDrop(MatraCount):
                     droppingCandidate.append(j)
         return droppingCandidate
 
+    def getModifiedScansion(self):
+        return self.modified_scansion
 
-a = "बरनउँ रघुबरो बिमल जसु"
-DohaMatraDrop(a, 13)
+    def getCandidates(self):
+        return self.candidates
+
+
+# a = "बरनउँ रघुबरो बिमल जसु"
+# DohaMatraDrop(a, 13)
