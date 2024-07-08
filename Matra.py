@@ -169,7 +169,7 @@ class MatraCount:
 # This is the pronunciation of words
 class PronunciationDictionary:
     def __init__(self, sentence, scansion):
-        self.word = sentence.split(" ")  # imput: - each word
+        self.word = sentence.split(" ")  # input: - each word
         self.sentecne = []
         
         words_scansion = []
@@ -275,6 +275,7 @@ class PronunciationDictionary:
                 elif word[i] == "्":
                     if i-2 < 0 and len(temp) > 0:
                         self.word_scansion.insert(0, temp[:])
+                        temp.clear()
                     i -= 2
             self.sentecne.append(self.word_scansion)
 
