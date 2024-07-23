@@ -7,6 +7,8 @@ class Doha:
         self.doha_quartered = []
         self.rhythm = []
         self.score = 0
+        self.req_mb_quarter = []
+        mb_q_num = 0
         # for doha quartered
         for x in doha:
             a = MatraCount(x).getSentenceQuarter()
@@ -18,6 +20,7 @@ class Doha:
         # for each quarter, find scansion and pronunciation and then
         # find the rhythm of the quarter
         for quarter in self.doha_quartered:
+            mb_q_num += 1
             scansion = MatraCount(quarter).getScansion()
 
             # check if the quarter is balanced. if balanced then find the pronunciation
@@ -148,6 +151,7 @@ class Doha:
 
             # if the sum of scansion is not 13 or 11
             else:
+                self.req_mb_quarter.append(mb_q_num)
                 # get the list of all the possible new scansions using 
                 # module - Drop.py
                 new_scansions = DohaMatraDrop(quarter, (13 if (i == 0 or i == 2) else 11)).getModifiedScansion()
@@ -277,14 +281,36 @@ class Doha:
                             self.rhythm[i].append(x)
                         self.score -= 1
                         i += 1
+            
+        if len(self.rhythm) != 4:
+            self.score = 1
 
 
     def getRhythm(self):
         return self.rhythm
+
     def getScore(self):
         return self.score/4
 
+    def getMatraBalancedQuarter(self):
+        return self.req_mb_quarter if len(self.req_mb_quarter) != 0 else "No Matra Balancing Required"
+    
+    def getType(self):
+        if self.score == 1:
+            return "Type 04"
+        elif self.score == 2:
+            return "Type 03"
+        elif self.score == 3:
+            return "Type 02"
+        elif self.score == 4:
+            return "Type 01"
+    
 
 
-a = "एकु छत्र एकु मुकुटमनि सब बरननि पर जोउ\nतुलसी रघुबर नाम के बरन बिराजत दोउ"
+
+a = "सगुल ध्यान रुचि सरस नहिं निर्गुण मन ते दूर\nतुलसी सुमिरहु राम को नाम सजीवन मूर"
 print(Doha(a).getScore())
+print(Doha(a).getType())
+print(Doha(a).getRhythm())
+print(Doha(a).getMatraBalancedQuarter())
+
